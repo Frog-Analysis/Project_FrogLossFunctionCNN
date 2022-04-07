@@ -204,7 +204,6 @@ def feature_extraction(_base_folder, _percent_value, _select_win_len, _select_wi
     return train_data_list, test_data_list, train_data_list_waveform, test_data_list_waveform, S
 
 
-
 if __name__ == '__main__':
     
     base_folder = r'.\Australia-Frog\0409_raw_data_clean'                
@@ -259,9 +258,10 @@ if __name__ == '__main__':
                     testLabel = np.ravel(test_label)
                     
                     print('normalization')
-                    training_feat = StandardScaler(copy=False).fit_transform(training_feat)
-                    validation_feat = StandardScaler(copy=False).fit_transform(validation_feat)
-                    testFeature = StandardScaler(copy=False).fit_transform(test_feat)
+                    std_scaler = StandardScaler(copy=False).fit(training_feat)
+                    training_feat = std_scaler.transform(training_feat)
+                    validation_feat = std_scaler.transform(validation_feat)
+                    testFeature = std_scaler.transform(test_feat)
                 
                     #===========================#
                     train_data_waveform = np.vstack(train_data_list_waveform)
