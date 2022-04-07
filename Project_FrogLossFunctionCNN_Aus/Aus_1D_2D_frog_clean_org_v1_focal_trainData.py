@@ -259,9 +259,10 @@ if __name__ == '__main__':
                 # bb1, bb2 = np.unique(validation_label_org, return_counts=True)
                 
                 print('normalization')
-                training_feat = StandardScaler(copy=False).fit_transform(training_feat)
-                validation_feat = StandardScaler(copy=False).fit_transform(validation_feat)
-                testFeature = StandardScaler(copy=False).fit_transform(test_feat)
+                std_scaler = StandardScaler(copy=False).fit(training_feat)
+                training_feat = std_scaler.transform(training_feat)
+                validation_feat = std_scaler.transform(validation_feat)
+                testFeature = std_scaler.transform(test_feat)
             
                 #===========================#
                 train_data_waveform = np.vstack(train_data_list_waveform)                
@@ -272,9 +273,10 @@ if __name__ == '__main__':
                 test_feat_waveform = train_feat_waveform[test_index,:]
                 
                 #--normalization
-                training_feat_waveform = StandardScaler(copy=False).fit_transform(training_feat_waveform)
-                validation_feat_waveform = StandardScaler(copy=False).fit_transform(validation_feat_waveform)
-                testFeature_waveform = StandardScaler(copy=False).fit_transform(test_feat_waveform)
+                std_scaler_waveform = StandardScaler(copy=False).fit(training_feat_waveform)
+                training_feat_waveform = std_scaler_waveform.transform(training_feat_waveform)
+                validation_feat_waveform = std_scaler_waveform.transform(validation_feat_waveform)
+                testFeature_waveform = std_scaler_waveform.transform(test_feat_waveform)
                 
                 #===========================#
                 print('reshape train data')
