@@ -273,9 +273,10 @@ if __name__ == '__main__':
                     training_feat_waveform = train_feat_waveform[training_index,:]
                     validation_feat_waveform = train_feat_waveform[validation_index,:]
                     
-                    training_feat_waveform = StandardScaler(copy=False).fit_transform(training_feat_waveform)
-                    validation_feat_waveform = StandardScaler(copy=False).fit_transform(validation_feat_waveform)
-                    testFeature_waveform = StandardScaler(copy=False).fit_transform(test_feat_waveform)
+                    std_scaler = StandardScaler(copy=False).fit(training_feat_waveform)
+                    training_feat_waveform = std_scaler.transform(training_feat_waveform)
+                    validation_feat_waveform = std_scaler.transform(validation_feat_waveform)
+                    testFeature_waveform = std_scaler.transform(test_feat_waveform)
                     
                     #===========================#
                     print('reshape train data')
