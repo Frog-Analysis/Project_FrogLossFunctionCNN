@@ -66,9 +66,10 @@ def feature_extraction(_base_folder, _percent_value, _select_win_len, _select_wi
 def feat_normalization(training_feat, validation_feat, test_feat):
     
     print('normalization start')
-    training_feat = StandardScaler(copy=False).fit_transform(training_feat)
-    validation_feat = StandardScaler(copy=False).fit_transform(validation_feat)
-    test_feature = StandardScaler(copy=False).fit_transform(test_feat)  
+    std_scaler = StandardScaler(copy=False).fit(training_feat)
+    training_feat = std_scaler.transform(training_feat)
+    validation_feat = std_scaler.transform(validation_feat)
+    test_feat = std_scaler.transform(test_feat) 
     print('normalization done')    
     
     return training_feat, validation_feat, test_feature
