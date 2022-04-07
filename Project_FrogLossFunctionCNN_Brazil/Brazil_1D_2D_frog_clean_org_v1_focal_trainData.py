@@ -190,10 +190,11 @@ if __name__ == '__main__':
                     testLabel = np.ravel(test_label)
                     
                     print('normalization')
-                    training_feat = StandardScaler(copy=False).fit_transform(training_feat)
-                    validation_feat = StandardScaler(copy=False).fit_transform(validation_feat)
-                    testFeature = StandardScaler(copy=False).fit_transform(test_feat)
-    
+                    std_scaler = StandardScaler(copy=False).fit(training_feat)
+                    training_feat = std_scaler.transform(training_feat)
+                    validation_feat = std_scaler.transform(validation_feat)
+                    test_feature = std_scaler.transform(test_feat)  
+
                     print('reshape train spectrogram data')
                     training_feat_final, training_label = vector_to_matrix(training_feat, training_label_org, num_classes)
                     validation_feat_final, validation_label = vector_to_matrix(validation_feat, validation_label_org, num_classes)
